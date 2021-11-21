@@ -10,6 +10,7 @@
 }
 
 #app .container {
+  display: grid;
   width: 376px;
   height: 666px;
   z-index: 100;
@@ -20,6 +21,9 @@
 }
 
 #app .container-view {
-  padding: 20px;
+  height: 485px;
+  margin-bottom: 12px;
+  padding: 20px 20px 0px 20px;
+  overflow: scroll;
 }
 

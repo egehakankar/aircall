@@ -1,0 +1,18 @@
+
+
+.ph {
+    border: 0.1px solid black !important;
+    background-color: #0b8b47 !important;
+    border-bottom-left-radius: 20px !important;
+    color: white !important;
+}
+
+.mh {
+    border: 0.1px solid black !important;
+}
+
+
+.lh {
+    border: 0.1px solid black !important;
+    border-bottom-right-radius: 20px !important;
+}

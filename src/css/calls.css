@@ -1,0 +1,40 @@
+.calls {
+    width: 100%;
+}
+
+.callContainer{
+    padding-top: 78px;
+    margin-left: -20px;
+}
+
+.archiveContainer{
+    margin-left: -20px;
+}
+ 
+.dropdown-menu {
+    width: 350px;
+    text-align: center;
+    margin: -20px;
+}
+
+.dropdown-item:active{
+    background-color: green !important;
+}
+
+.inbCall {
+    overflow:scroll;     
+}
+
+.card{
+    width: 348px !important;
+    margin-bottom: 3px;
+    padding: 0 5px 0 5px;
+    flex-direction: inherit;
+}
+
+.detCall {
+    width: 350px !important;
+    margin-left: -10px;
+    flex-direction: column;
+}
+

@@ -1,17 +1,47 @@
-import React from 'react';
+import React, { Component } from 'react'
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router } from "react-router-dom";
+import { Route, Routes, Link } from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Header from './Header.jsx';
+import BottomNav from './BottomNav.jsx';
+import Calls from './Components/Calls.jsx';
+import Archive from './Components/Archive.jsx';
+import DetailedCall from './Components/DetailedCall.jsx'
 
-const App = () => {
-  return (
-    <div className='container'>
-      <Header/>
-      <div className="container-view">Some activities should be here</div>
-    </div>
-  );
-};
+class App extends Component {
+  constructor() {
+    super()
+    this.state =
+    {
+      mount: false,
+    }
+  }
 
-ReactDOM.render(<App/>, document.getElementById('app'));
+  componentDidMount() {
+    this.setState(state => ({
+      mount: true,
+    }));
+  }
+
+  render() {
+    return (
+      <Router>
+        <div className="container">
+          <Header />
+          <div className="container-view">
+            <Routes>
+              <Route path="/" element={<Calls />} />
+              <Route path="/archive" element={<Archive />} />
+              <Route path="/call/:id" element={<DetailedCall />} />
+            </Routes>
+          </div>
+          <BottomNav />
+        </div>
+      </Router>
+    )
+  }
+}
 
 export default App;

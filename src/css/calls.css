@@ -41,8 +41,8 @@
 
 .carCall:hover {
     color: white !important;
-    background-color: darkgrey !important;
-    backdrop-filter: opacity(20%);
+    background-color: rgb(198, 198, 198) !important;
+    backdrop-filter: opacity(100%);
     transition: all 0.5s !important;
 }
 

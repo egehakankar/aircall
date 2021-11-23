@@ -25,6 +25,7 @@ class BottomNav extends Component {
     this.getCalls()
   }
 
+  //Recieves all calls.
   getCalls() {
       const API_PATH = 'https://aircall-job.herokuapp.com/activities';
       axios({
@@ -45,6 +46,7 @@ class BottomNav extends Component {
           .catch(error => this.setState({ error: error.message }));
   }
 
+  //Counts missed calls.
   countMiss() {
     var countTemp = this.state.calls.filter (item => item.call_type === "missed").length
     this.setState({ missCount: countTemp})

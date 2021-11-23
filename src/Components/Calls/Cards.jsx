@@ -21,6 +21,7 @@ class Cards extends Component {
         this.unarchive = this.unarchive.bind(this);
     }
 
+    //Sends POST request to API to archive call
     archive(id) {
         const API_PATH = 'https://aircall-job.herokuapp.com/activities/' + id;
         axios({
@@ -38,6 +39,7 @@ class Cards extends Component {
             .catch(error => this.setState({ error: error.message }));
     }
 
+    //Sends POST request to API to unarchive call
     unarchive(id) {
         const API_PATH = 'https://aircall-job.herokuapp.com/activities/' + id;
         axios({

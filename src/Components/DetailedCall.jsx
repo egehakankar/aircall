@@ -34,8 +34,7 @@ class DetailedCall extends Component {
         });
     }
 
-
-
+    //Gets call by id number.
     getCall() {
         const API_PATH = 'https://aircall-job.herokuapp.com/activities/' + this.state.id;
         axios({
@@ -56,6 +55,7 @@ class DetailedCall extends Component {
 
     }
 
+    //Gets all calls and filters according to the contacts name or number.
     getCalls() {
         const API_PATH = 'https://aircall-job.herokuapp.com/activities/';
         axios({
@@ -75,17 +75,18 @@ class DetailedCall extends Component {
             .catch(error => this.setState({ error: error.message }));
     }
 
+    //Archives or Unarchives the individual call.
     delA(id) {
         const index = this.state.data2.findIndex(emp => emp.id === id),
-            data2 = [...this.state.data2] // important to create a copy, otherwise you'll modify state outside of setState call
+            data2 = [...this.state.data2]
         data2[index].is_archived = !data2[index].is_archived;
         this.setState({ data2 });
 
     }
 
-
-
     render() {
+
+        //Sorts calls according to the date.
         this.state.data2.sort(function compare(a, b) {
             var dateA = new Date(a.created_at)
             var dateB = new Date(b.created_at)
@@ -95,6 +96,7 @@ class DetailedCall extends Component {
         var dateChecker = false;
         var onDelete = this.delA;
 
+        //Creating the Call Cards of the Detailed Contact.
         let allCalls = this.state.data2.map(function (datas) {
             var date = new Date(datas.created_at);
             var printDate = date.getDay() + " " + date.toLocaleString('en', { month: 'long' }) + " " + date.getFullYear();
@@ -134,9 +136,9 @@ class DetailedCall extends Component {
                                         {this.state.data.from === null ? <div>Unknown</div> : this.state.data.from}
                                     </Card.Title>
                                     <ButtonGroup variant="contained" aria-label="outlined primary button group">
-                                        <Button className = "callButtons" style={{ borderColor: "darkgrey" }} variant="contained" color="success">Call</Button>
-                                        <Button className = "callButtons" style={{ backgroundColor: "#2a9158", borderColor: "darkgrey" }}>Video Call</Button>
-                                        <Button className = "callButtons" style={{ backgroundColor: "#c78522", borderColor: "darkgrey" }}>Message</Button>
+                                        <Button className="callButtons" style={{ borderColor: "darkgrey" }} variant="contained" color="success">Call</Button>
+                                        <Button className="callButtons" style={{ backgroundColor: "#2a9158", borderColor: "darkgrey" }}>Video Call</Button>
+                                        <Button className="callButtons" style={{ backgroundColor: "#c78522", borderColor: "darkgrey" }}>Message</Button>
 
                                     </ButtonGroup>
 
@@ -165,10 +167,10 @@ class DetailedCall extends Component {
                                     </Card.Title>
                                     <ButtonGroup variant="contained" aria-label="outlined primary button group">
 
-                                        <Button className = "callButtons" style={{ borderColor: "darkgrey" }} variant="contained" color="success">Call</Button>
-                                        <Button className = "callButtons" style={{ backgroundColor: "#2a9158", borderColor: "darkgrey" }}>Video Call</Button>
-                                        <Button className = "callButtons" style={{ backgroundColor: "#c78522", borderColor: "darkgrey" }}>Message</Button>
-                                    
+                                        <Button className="callButtons" style={{ borderColor: "darkgrey" }} variant="contained" color="success">Call</Button>
+                                        <Button className="callButtons" style={{ backgroundColor: "#2a9158", borderColor: "darkgrey" }}>Video Call</Button>
+                                        <Button className="callButtons" style={{ backgroundColor: "#c78522", borderColor: "darkgrey" }}>Message</Button>
+
                                     </ButtonGroup>
 
                                 </Card.Body>

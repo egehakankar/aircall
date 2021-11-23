@@ -19,11 +19,13 @@ class Archive extends Component {
         this.getCalls()
     }
 
+    //Unarchives the individual call.
     delA(id) {
         const calls = this.state.calls.filter(calls => calls.id !== id);
         this.setState({ calls: calls });
     }
 
+    //Gets all calls
     getCalls() {
         const API_PATH = 'https://aircall-job.herokuapp.com/activities';
         axios({
@@ -46,6 +48,8 @@ class Archive extends Component {
 
 
     render() {
+
+        //Sorts calls according to the date.
         this.state.calls.sort(function compare(a, b) {
             var dateA = new Date(a.created_at)
             var dateB = new Date(b.created_at)
@@ -55,6 +59,7 @@ class Archive extends Component {
         var dateChecker = false;
         var onDelete = this.delA;
 
+        //Creating the Call Cards of Archived.
         let archivedCalls = this.state.calls.map(function (datas) {
             var date = new Date(datas.created_at);
             var printDate = date.getDay() + " " + date.toLocaleString('en', { month: 'long' }) + " " + date.getFullYear();

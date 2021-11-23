@@ -1,30 +1,17 @@
 ## Summary
 
-The goal of this test is to make you code a small ReactJS app. We have prepared a skeleton app for you, but please change whatever you want (CSS files, HTML structure, JS structure, etc).
+An application that manages previous inbox, outbox, missed, and archived calls. Written in **REACT.js**. Used **axios** library to send requests to the API's. 
 
-The app will have two different components:
+The app has two different components:
 - **Activity Feed** - simple list of calls
 - **Activity Detail** - detail of a call
-- **Archive** - the final user should be able to archive (and unarchive) a call. Archived calls will no longer be displayed on the Activity Feed and should have a separate Archived Tab.
+- **Archive** - archived calls. The user has the ability to archive and un-archive a call
 
-Show us what you can do in 24 hours. You will be assessed on the following parameters: 
-- Focus on design (Pay attention to the UI/UX and transitions)
-- Best React Practices
-- Code Readability and Maintainability
-
-## Submission
-After you're done with the assignment, please submit a link to the **GitHub/Bitbucket repository** (make sure it's public) with your code **AND** a deployment link where our recruiters can interact with the live version. You can use freely available tools like **Netlify, Vercel, Heroku, etc** to deploy your React application.
-
-**Note:** Submissions without a valid repository and deployment link will be removed from any further consideration.
-
-To give you an idea, here's what our app looks like:
-
-
-![app](https://user-images.githubusercontent.com/630714/29357034-763d7216-8276-11e7-8bcb-e77d9645dfcc.png)
+The app consists two style libraries: 
+- Material UI
+- React Bootstrap
 
 ## Installation
-
-We're using [yarn](https://yarnpkg.com) here (but you can use npm):
 
 ```
 yarn install
@@ -37,16 +24,9 @@ yarn start
 
 Here is the API address: https://aircall-job.herokuapp.com.
 
-As you can see, it's hosted on a free Heroku server, which means that the first time you will fetch the API, it will take few seconds to answer.
-
 - **GET** - https://aircall-job.herokuapp.com/activities: get calls to display in the Activity Feed
 - **GET** - https://aircall-job.herokuapp.com/activities/:id: retrieve a specific call details
-- **POST** - https://aircall-job.herokuapp.com/activities/:id: update a call. The only field updatable is `is_archived (bool)`. You'll need to send a JSON in the request body:
-```
-{
-  is_archived: true
-}
-```
+- **POST** - https://aircall-job.herokuapp.com/activities/:id: update a call. 
 - **GET** - https://aircall-job.herokuapp.com/reset: Reset all calls to initial state (usefull if you archived all calls).
 
 ### Call object

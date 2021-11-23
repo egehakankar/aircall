@@ -25,6 +25,7 @@ class App extends Component {
     }));
   }
 
+  //Router and Routes
   render() {
     return (
       <Router>

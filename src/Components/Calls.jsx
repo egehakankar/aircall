@@ -26,6 +26,7 @@ class Calls extends Component {
         this.getCalls()
     }
 
+    //Gets all the calls.
     getCalls() {
         const API_PATH = 'https://aircall-job.herokuapp.com/activities';
         axios({
@@ -47,10 +48,12 @@ class Calls extends Component {
             .catch(error => this.setState({ error: error.message }));
     }
 
+    //Changes the call type (all, inbox, outbox, missed).
     changeT(checker) {
         this.setState({ typeC: checker });
     }
 
+    //Archives a call.
     delA(id) {
         const calls = this.state.calls.filter(calls => calls.id !== id);
         this.setState({ calls: calls });
@@ -62,6 +65,8 @@ class Calls extends Component {
 
 
     render() {
+
+        //Sorts calls according to the date.
         this.state.calls.sort(function compare(a, b) {
             var dateA = new Date(a.created_at)
             var dateB = new Date(b.created_at)
@@ -71,6 +76,7 @@ class Calls extends Component {
         var dateChecker = false;
         var onDelete = this.delA;
 
+        //Creating the Call Cards of All Cards.
         let allCalls = this.state.calls.map(function (datas) {
             var date = new Date(datas.created_at);
             var printDate = date.getDay() + " " + date.toLocaleString('en', { month: 'long' }) + " " + date.getFullYear();
@@ -96,6 +102,8 @@ class Calls extends Component {
             )
         });
         prevDate = "";
+
+        //Creating the Call Cards of Missed Cards.
         let missed = this.state.calls.map(function (datas) {
             var date = new Date(datas.created_at);
             var printDate = date.getDay() + " " + date.toLocaleString('en', { month: 'long' }) + " " + date.getFullYear();
@@ -121,6 +129,8 @@ class Calls extends Component {
             )
         });
         prevDate = "";
+
+        //Creating the Call Cards of Inbox Cards.
         let inbox = this.state.calls.map(function (datas) {
             var date = new Date(datas.created_at);
             var printDate = date.getDay() + " " + date.toLocaleString('en', { month: 'long' }) + " " + date.getFullYear();
@@ -146,6 +156,8 @@ class Calls extends Component {
             )
         });
         prevDate = "";
+
+        //Creating the Call Cards of Outbox Cards.
         let outbox = this.state.calls.map(function (datas) {
             var date = new Date(datas.created_at);
             var printDate = date.getDay() + " " + date.toLocaleString('en', { month: 'long' }) + " " + date.getFullYear();

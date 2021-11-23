@@ -30,10 +30,11 @@ class Header extends Component {
 
   }
   
+  //Changes archive to calls && vice versa
   changeChecker(checkk){
     this.setState({checker: checkk})
   }
-
+  
   render() {
     return (
       <div className="header">

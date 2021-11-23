@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 
-import ArchiveCards from './Archive/ArchiveCards.jsx';
-
+import Cards from './Calls/Cards.jsx';
 
 class Archive extends Component {
 
@@ -47,9 +46,43 @@ class Archive extends Component {
 
 
     render() {
+        this.state.calls.sort(function compare(a, b) {
+            var dateA = new Date(a.created_at)
+            var dateB = new Date(b.created_at)
+            return dateB - dateA;
+        });
+        var prevDate = "";
+        var dateChecker = false;
+        var onDelete = this.delA;
+
+        let archivedCalls = this.state.calls.map(function (datas) {
+            var date = new Date(datas.created_at);
+            var printDate = date.getDay() + " " + date.toLocaleString('en', { month: 'long' }) + " " + date.getFullYear();
+            var time = date.getHours() + ":" + date.getMinutes();
+
+            if(printDate === prevDate) {
+                dateChecker = false;
+            } else if(datas.is_archived === true){
+                dateChecker = true
+                prevDate = printDate
+            }
+            else {
+                dateChecker = false;
+            }
+
+            return (
+                <div key={datas.id} className="allCards">
+                    {dateChecker ? <div className="dateContainer" > {printDate}</div> : ""}
+                    {datas.is_archived === true ?
+                        <Cards datas={datas} time={time} onDelete={onDelete}/>
+                        : ""}
+                </div>
+            )
+        });
+
         return (
             <div className="archiveContainer">
-                    <ArchiveCards onDelete = {this.delA} datas={this.state.calls} />
+                {archivedCalls}
             </div>
         )
     }

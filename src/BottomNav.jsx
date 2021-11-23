@@ -56,7 +56,7 @@ class BottomNav extends Component {
           <BottomNavigation
             showLabels
           >
-            <BottomNavigationAction className="ph" label={"Calls " + this.state.missCount} icon={<PhoneIcon />} active />
+            <BottomNavigationAction className="ph" label={"Calls (" + this.state.missCount + ")"} icon={<PhoneIcon />} />
             <BottomNavigationAction className="mh" label="Call" icon={<DialpadIcon />} />
             <BottomNavigationAction className="lh" label="Contacts" icon={<ContactPhoneIcon />} />
           </BottomNavigation>

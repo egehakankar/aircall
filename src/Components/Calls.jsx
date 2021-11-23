@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 
-import InboxCards from './Calls/InboxCards.jsx';
-import AllCards from './Calls/AllCards.jsx';
-import MissedCards from './Calls/MissedCards.jsx'
-import OutboxCards from './Calls/OutboxCards.jsx'
+import Cards from './Calls/Cards.jsx';
 
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -65,9 +62,118 @@ class Calls extends Component {
 
 
     render() {
-        const { classes, value } = this.props;
+        this.state.calls.sort(function compare(a, b) {
+            var dateA = new Date(a.created_at)
+            var dateB = new Date(b.created_at)
+            return dateB - dateA;
+        });
+        var prevDate = "";
+        var dateChecker = false;
+        var onDelete = this.delA;
+
+        let allCalls = this.state.calls.map(function (datas) {
+            var date = new Date(datas.created_at);
+            var printDate = date.getDay() + " " + date.toLocaleString('en', { month: 'long' }) + " " + date.getFullYear();
+            var time = date.getHours() + ":" + date.getMinutes();
+
+            if (printDate === prevDate) {
+                dateChecker = false;
+            } else if (datas.is_archived === false) {
+                dateChecker = true
+                prevDate = printDate
+            }
+            else {
+                dateChecker = false;
+            }
+
+            return (
+                <div key={datas.id} className="allCards">
+                    {dateChecker ? <div className="dateContainer" > {printDate}</div> : ""}
+                    {datas.is_archived === false ?
+                        <Cards datas={datas} time={time} onDelete={onDelete}/>
+                        : ""}
+                </div>
+            )
+        });
+        prevDate = "";
+        let missed = this.state.calls.map(function (datas) {
+            var date = new Date(datas.created_at);
+            var printDate = date.getDay() + " " + date.toLocaleString('en', { month: 'long' }) + " " + date.getFullYear();
+            var time = date.getHours() + ":" + date.getMinutes();
+
+            if (printDate === prevDate) {
+                dateChecker = false;
+            } else if (datas.is_archived === false && datas.call_type === "missed") {
+                dateChecker = true
+                prevDate = printDate
+            }
+            else {
+                dateChecker = false;
+            }
+
+            return (
+                <div key={datas.id} className="allCards">
+                    {dateChecker ? <div className="dateContainer" > {printDate}</div> : ""}
+                    {datas.is_archived === false && datas.call_type === "missed" ? 
+                        <Cards datas={datas} time={time} onDelete={onDelete}/>
+                        : ""}
+                </div>
+            )
+        });
+        prevDate = "";
+        let inbox = this.state.calls.map(function (datas) {
+            var date = new Date(datas.created_at);
+            var printDate = date.getDay() + " " + date.toLocaleString('en', { month: 'long' }) + " " + date.getFullYear();
+            var time = date.getHours() + ":" + date.getMinutes();
+
+            if (printDate === prevDate) {
+                dateChecker = false;
+            } else if (datas.is_archived === false && datas.direction === "inbound") {
+                dateChecker = true
+                prevDate = printDate
+            }
+            else {
+                dateChecker = false;
+            }
+
+            return (
+                <div key={datas.id} className="allCards">
+                    {dateChecker ? <div className="dateContainer" > {printDate}</div> : ""}
+                    {datas.is_archived === false && datas.direction === "inbound"?
+                        <Cards datas={datas} time={time} onDelete={onDelete}/>
+                        : ""}
+                </div>
+            )
+        });
+        prevDate = "";
+        let outbox = this.state.calls.map(function (datas) {
+            var date = new Date(datas.created_at);
+            var printDate = date.getDay() + " " + date.toLocaleString('en', { month: 'long' }) + " " + date.getFullYear();
+            var time = date.getHours() + ":" + date.getMinutes();
+
+            if (printDate === prevDate) {
+                dateChecker = false;
+            } else if (datas.is_archived === false && datas.direction !== "inbound") {
+                dateChecker = true
+                prevDate = printDate
+            }
+            else {
+                dateChecker = false;
+            }
+
+            return (
+                <div key={datas.id} className="allCards">
+                    {dateChecker ? <div className="dateContainer" > {printDate}</div> : ""}
+                    {datas.is_archived === false && datas.direction !== "inbound" ?
+                        <Cards datas={datas} time={time} onDelete={onDelete}/>
+                        : ""}
+                </div>
+            )
+        });
+
+
         return (
-            <div className="calls">
+            <div className="calls" >
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                     <Tabs onChange={this.handleChange} value={this.state.value} aria-label="basic tabs example" variant="fullWidth">
                         <Tab onClick={() => this.changeT("all")} label="All" />
@@ -79,18 +185,19 @@ class Calls extends Component {
 
                 <div className="callContainer">
                     {this.state.typeC === "inb" ?
-                        <InboxCards className="inbCall" onDelete={this.delA} datas={this.state.calls} />
+                        <div>{inbox}</div>
                         :
                         this.state.typeC === "all" ?
-                            < AllCards onDelete={this.delA} datas={this.state.calls} />
+                            <div>{allCalls}</div>
                             :
                             this.state.typeC === "miss" ?
-                                < MissedCards onDelete={this.delA} datas={this.state.calls} />
+                            <div>{missed}</div>
                                 :
-                                < OutboxCards onDelete={this.delA} datas={this.state.calls} />
+                                <div>{outbox}</div>
                     }
                 </div>
-            </div>
+
+            </div >
         )
     }
 }

@@ -48,10 +48,11 @@
 }
 
 .MuiBox-root {
-    margin: -20px;
+    margin: -20px !important;
+    max-width: 351px !important;
 }
 
-.css-1aquho2-MuiTabs-indicator {
+.MuiTabs-indicator {
     background-color: #6da375 !important;
 }
 

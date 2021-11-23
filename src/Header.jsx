@@ -9,6 +9,7 @@ import ArchiveIcon from '@mui/icons-material/Archive';
 
 import Nav from 'react-bootstrap/Nav';
 
+import Image from './images/callable.png';
 
 
 class Header extends Component {
@@ -17,33 +18,41 @@ class Header extends Component {
     this.state =
     {
       mount: false,
+      checker: false,
     }
+    this.changeChecker = this.changeChecker.bind(this);
   }
 
   componentDidMount() {
     this.setState(state => ({
       mount: true,
     }));
+
+  }
+  
+  changeChecker(checkk){
+    this.setState({checker: checkk})
   }
 
   render() {
     return (
       <div className="header">
-          <div className="logoHeader" >
-            <DialpadIcon className="logo" />
-            <h1 className="nameLogo">Callable</h1>
+        <div className="logoHeader" >
+          <img className="logoI" src={Image} />
+        </div>
 
-          </div>
-
-        <Nav justify variant="tabs" defaultActiveKey="/">
-          <Nav.Item className="fHeaderNav">
-            <Nav.Link as={Link} to="/" eventKey="link-1">
-            <PhoneInTalkIcon/> Calls
+        <Nav fill variant="tabs" defaultActiveKey="/">
+          <Nav.Item onClick={() => {this.changeChecker(false)}}>
+            <Nav.Link className="headNav"  as={Link} to="/" eventKey="link-1" className={this.state.checker ? "" : "active"} >
+              <PhoneInTalkIcon /> Calls
             </Nav.Link>
-          </Nav.Item >
-          <Nav.Link className="sHeaderNav" as={Link} to="/archive" eventKey="link-2">
-            <ArchiveIcon /> Archive
-          </Nav.Link>
+          </Nav.Item>
+
+          <Nav.Item onClick={() => {this.changeChecker(true)}}>
+            <Nav.Link className="headNav" as={Link} to="/archive" eventKey="link-2" className={this.state.checker ? "active" : ""}>
+              <ArchiveIcon /> Archive
+            </Nav.Link>
+          </Nav.Item>
         </Nav>
       </div>
     )

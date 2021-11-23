@@ -1,18 +1,26 @@
-
-
 .ph {
-    border: 0.1px solid black !important;
-    background-color: #0b8b47 !important;
-    border-bottom-left-radius: 20px !important;
+    border-top-left-radius: 40% !important;
+    background-color: #5c9865 !important;
     color: white !important;
+    border-top: 2px solid darkgray !important;
+    font-size: 200px !important;
+}
+
+.lh {
+    border-top: 2px solid darkgray !important;
+    border-left: 0.1px solid black !important;
+    border-top-right-radius: 40% !important;
 }
 
 .mh {
-    border: 0.1px solid black !important;
+    border-top: 2px solid darkgray !important;
 }
 
+.botCot {
+    padding-top: 2px !important;
+    margin: -12px;
+}
 
-.lh {
-    border: 0.1px solid black !important;
-    border-bottom-right-radius: 20px !important;
+.css-imwso6-MuiBottomNavigationAction-label {
+    font-size: 0.85rem !important;
 }

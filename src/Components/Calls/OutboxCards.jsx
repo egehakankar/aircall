@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import axios from 'axios';
 
+
 import Card from 'react-bootstrap/Card'
 
-import VoicemailIcon from '@mui/icons-material/Voicemail';
-import PhoneCallbackIcon from '@mui/icons-material/PhoneCallback';
 import SendAndArchiveIcon from '@mui/icons-material/SendAndArchive';
+import PhoneForwardedIcon from '@mui/icons-material/PhoneForwarded';
 
-
-class InboxCards extends Component {
+class OutboxCards extends Component {
     constructor() {
         super()
         this.state =
@@ -51,7 +50,7 @@ class InboxCards extends Component {
 
             if (printDate === prevDate) {
                 dateChecker = false;
-            } else if (datas.is_archived === false && datas.direction === "inbound") {
+            } else if (datas.is_archived === false && datas.direction !== "inbound") {
                 dateChecker = true
                 prevDate = printDate
             }
@@ -63,24 +62,26 @@ class InboxCards extends Component {
                 <div key={datas.id} className="allCards">
 
                     {dateChecker ? <div className="dateContainer" > {printDate}</div> : ""}
-                    {datas.is_archived === false && datas.direction === "inbound" ?
+                    {datas.is_archived === false && datas.direction !== "inbound" ?
                         <div className="inboxCard">
-                            <Card style={{ border: '1px solid #0f8b47' }}>
+                            <Card style={{ border: '1px solid #fda500' }}>
                                 <Link style={{ all: "unset", cursor: "pointer", display: "flex" }} className="callIndividual" to={'/call/' + datas.id}  >
                                     <div className="callIndividual">
-                                        {datas.call_type === "answered" ? <PhoneCallbackIcon style={{ color: 'green', height: 'auto', width: '25px' }} /> : <VoicemailIcon style={{ color: 'green', height: 'auto', width: '25px' }} />}
-                                        <p style={{ color: "#0f8b47" }}>{time}</p>
+                                        <PhoneForwardedIcon style={{ color: 'orange', height: 'auto', width: '25px' }} />
+                                        <p style = {{color: "orange"}}>{time}</p>
                                     </div>
+
+
                                     <Card.Body style={{ width: "250px", maxWidth: '250px' }}>
-                                        <Card.Title style={{ fontSize: "1.1rem" }}>{datas.from}</Card.Title>
-                                        {datas.to === null ? "" :
+                                        <Card.Title style={{ fontSize: "1.1rem" }}>{datas.to}</Card.Title>
+                                        {datas.from === null ? "" :
                                             <Card.Text>
-                                                Call from {datas.to}
+                                                Call to {datas.from}
                                             </Card.Text>
                                         }
                                     </Card.Body>
                                 </Link>
-                                <button style={{ all: 'unset', cursor: 'pointer', textAlign: 'center', fontSize: "0.7rem", paddingLeft: "0.8rem" }} onClick={() => { this.archive(datas.id); this.props.onDelete(datas.id) }}><SendAndArchiveIcon style={{ width: "20px" }} /> <div>Archive</div></button>
+                                <button style={{ all: 'unset', cursor: 'pointer', textAlign: 'center', fontSize: "0.7rem", paddingLeft: "0.8rem" }} onClick={() => { this.archive(datas.id); this.props.onDelete(datas.id) }}><SendAndArchiveIcon  style = {{width: "20px"}}/> <div>Archive</div></button>
                             </Card>
                         </div>
                         :
@@ -97,4 +98,4 @@ class InboxCards extends Component {
     }
 
 }
-export default InboxCards;
+export default OutboxCards;

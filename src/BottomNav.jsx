@@ -1,35 +1,53 @@
 import React, { Component } from 'react'
-import Box from '@mui/material/Box';
+import axios from 'axios';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import RestoreIcon from '@mui/icons-material/Restore';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
 import PhoneIcon from '@mui/icons-material/Phone';
 import DialpadIcon from '@mui/icons-material/Dialpad';
 
-
-import Paper from '@mui/material/Paper';
-
-import Nav from 'react-bootstrap/Nav';
-
-
+import PhoneMissedIcon from '@mui/icons-material/PhoneMissed';
 
 class BottomNav extends Component {
   constructor() {
     super()
     this.state =
     {
-      mount: false,
+      calls: [],
+      missCount: 0,
     }
+    this.getCalls = this.getCalls.bind(this)
+    this.countMiss = this.countMiss.bind(this)
   }
 
   componentDidMount() {
-    this.setState(state => ({
-      mount: true,
-    }));
+    this.getCalls()
+  }
+
+  getCalls() {
+      const API_PATH = 'https://aircall-job.herokuapp.com/activities';
+      axios({
+          method: 'get',
+          url: `${API_PATH}`,
+          headers: {
+              'content-type': 'application/json',
+              'Accept': 'application/json',
+              'X-Requested-With': 'XMLHttpRequest'
+          }
+      })
+          .then(result => {
+              let res = result.data;
+              if (res) {
+                  this.setState({ calls: res }, () => {this.countMiss()} );
+              }
+          })
+          .catch(error => this.setState({ error: error.message }));
+  }
+
+  countMiss() {
+    var countTemp = this.state.calls.filter (item => item.call_type === "missed").length
+    this.setState({ missCount: countTemp})
   }
 
   render() {
@@ -38,9 +56,9 @@ class BottomNav extends Component {
           <BottomNavigation
             showLabels
           >
-            <BottomNavigationAction className="ph" label="Calls" icon={<PhoneIcon />} active />
+            <BottomNavigationAction className="ph" label={"Calls " + this.state.missCount} icon={<PhoneIcon />} active />
             <BottomNavigationAction className="mh" label="Call" icon={<DialpadIcon />} />
-            <BottomNavigationAction className="lh" label="Contact" icon={<ContactPhoneIcon />} />
+            <BottomNavigationAction className="lh" label="Contacts" icon={<ContactPhoneIcon />} />
           </BottomNavigation>
       </div>
     )

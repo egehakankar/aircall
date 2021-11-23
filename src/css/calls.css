@@ -2,34 +2,37 @@
     width: 100%;
 }
 
-.callContainer{
-    padding-top: 78px;
+.callContainer {
+    padding-top: 19px;
     margin-left: -20px;
 }
 
-.archiveContainer{
+.archiveContainer {
+    margin-top: -20px;
     margin-left: -20px;
 }
- 
+
 .dropdown-menu {
     width: 350px;
     text-align: center;
     margin: -20px;
 }
 
-.dropdown-item:active{
+.dropdown-item:active {
     background-color: green !important;
 }
 
 .inbCall {
-    overflow:scroll;     
+    overflow: scroll;
 }
 
-.card{
-    width: 348px !important;
+.card {
+    width: 352px !important;
     margin-bottom: 3px;
     padding: 0 5px 0 5px;
+    border-radius: 1.25rem;
     flex-direction: inherit;
+    max-height: 67px !important;
 }
 
 .detCall {
@@ -38,3 +41,38 @@
     flex-direction: column;
 }
 
+.css-1ujykiq-MuiButtonBase-root-MuiTab-root {
+    min-width: 0px !important;
+    font-size: 0.9rem;
+    line-height: 1;
+}
+
+.MuiBox-root {
+    margin: -20px;
+}
+
+.css-1aquho2-MuiTabs-indicator {
+    background-color: #6da375 !important;
+}
+
+.css-1ujykiq-MuiButtonBase-root-MuiTab-root.Mui-selected {
+    color: #6da375 !important;
+}
+
+.dateContainer {
+    text-align: center;
+    padding: 10px 0;
+    font-weight: 300;
+    font-size: medium;
+    margin-right: -20px;
+}
+
+.callIndividual {
+    height: 100%;
+    padding: 15px 0 0 5px;
+    text-align: center;
+}
+
+.card-body {
+    margin-top: -5px;
+}

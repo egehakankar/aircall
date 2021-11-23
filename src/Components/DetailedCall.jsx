@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { withRouter } from "react-router";
 import axios from 'axios';
 
 import Card from 'react-bootstrap/Card'
@@ -12,6 +11,7 @@ class DetailedCall extends Component {
         {
             id: 0,
             data: [],
+            data2: [],
         }
         this.getCall = this.getCall.bind(this);
     }
@@ -36,7 +36,6 @@ class DetailedCall extends Component {
         })
             .then(result => {
                 this.setState({ data: result.data });
-                console.log(this.state.data);
             })
             .catch(error => this.setState({ error: error.message }));
     }

@@ -23,7 +23,6 @@ class Archive extends Component {
     delA(id) {
         const calls = this.state.calls.filter(calls => calls.id !== id);
         this.setState({ calls: calls });
-        console.log("fdsfds")
     }
 
     getCalls() {
@@ -42,7 +41,6 @@ class Archive extends Component {
                 if (res) {
                     this.setState({ calls: res });
                 }
-                console.log(res);
             })
             .catch(error => this.setState({ error: error.message }));
     }
